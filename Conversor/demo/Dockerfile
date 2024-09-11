@@ -1,18 +1,13 @@
-FROM maven:3.9.4-openjdk-21 AS build
+FROM jelastic/maven:3.9.4-openjdk-22.ea-b17 AS build
 WORKDIR /app
-
 COPY pom.xml .
-RUN mvn dependency:go-offline
-
 COPY src ./src
 
-RUN mvn clean package -DskipTests
+RUN mvn clean install -DskipTests
 
-FROM openjdk:21-jdk
+FROM openjdk:22-jdk
 WORKDIR /app
-
-COPY --from=build /app/target/*.jar app.jar
-
+COPY --from=build /root/.m2/repository/com/example/demo/0.0.1-SNAPSHOT/demo-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
