@@ -10,12 +10,12 @@ public class TemperaturaController {
     @GetMapping("/celsiusParaFahrenheit/{celsius}")
     public String celsiusParaFahrenheit(@PathVariable double celsius) {
         double fahrenheit = (celsius * 1.8) + 32;
-        return String.format("%.2f Celsius é igual a %.2f Fahrenheit", celsius, fahrenheit);
+        return String.format("%.2f Graus Celsius é igual a %.2f Graus Fahrenheit", celsius, fahrenheit);
     }
 
     @GetMapping("/fahrenheitParaCelsius/{fahrenheit}")
     public String fahrenheitParaCelsius(@PathVariable double fahrenheit) {
         double celsius = (fahrenheit - 32) / 1.8;
-        return String.format("%.2f Fahrenheit é igual a %.2f Celsius", fahrenheit, celsius);
+        return String.format("%.2f Graus Fahrenheit é igual a %.2f Graus Celsius ", fahrenheit, celsius);
     }
 }
